@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="item-box"></div>
+<script src="./js/nej-framework-master/src/define.js"></script>
+<script>
+  NEJ.define([
+    'base/event',
+    './item.js'
+  ], function(_e, _i0, _p, _o, _f, _r) {
+    // var list = [{name: 'xiafan'}, {name: 'pal'}]
+    // var _item = _i0._$$MyItem._$allocate({
+    //   parent: 'item-box',
+    //   data: list
+    // });
+    // 可以利用_e._$getItemTemplate接口，返回item列表
+    var _  = NEJ.P, _e = _('nej.e');
+    _e._$getItemTemplate(
+      [{name: 'jack'}, {name: 'sean'}],
+      _i0._$$MyItem,
+      {parent: 'item-box'}
+    );
+  });
+</script>
+</body>
+</html>

@@ -254,6 +254,7 @@ body {
 }
 
 .footer {
+    display: none;
     color: #777;
     padding: 10px 15px;
     height: 20px;

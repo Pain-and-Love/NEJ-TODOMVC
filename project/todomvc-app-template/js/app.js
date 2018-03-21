@@ -7,23 +7,32 @@ NEJ.define([
   var listType = 'all';
 
   function render() {
+    renderList();
+    renderFooter();
+  }
+
+  function getItemClass(item) {
+    return (item.isEditing ? 'editing' : '') + (item.isCompleted ? 'completed' : '');
+  }
+
+  function renderList() {
     //  根据type和list来渲染列表
     var ulInnerHTML = '';
     _u._$forEach(todoList, function(_item, _index) {
-      ulInnerHTML += '<li data-index=' + _index + '>' +
+      ulInnerHTML += '<li class="' + getItemClass(_item) + '" data-index=' + _index + '>' +
         '<div class="view">' +
         '<input class="toggle" type="checkbox">' +
-        '<label>' + _item.value + '</label>' +
+        '<label class="content">' + _item.value + '</label>' +
         '<button class="destroy"></button>' +
         '</div>' +
         '<input class="edit" value="' + _item.value + '">' +
         '</li>';
     });
-    renderFooter();
     $('#todo-list')._$html(ulInnerHTML);
   }
 
   function renderFooter() {
+    $('#num')._$text(todoList.length);
     $('#footer')._$style('display', todoList.length ? 'block' : 'none');
   }
 
@@ -42,15 +51,43 @@ NEJ.define([
   function removeItem(index) {
     todoList.splice(index, 1);
     render();
-    // _e._$remove(liNode, false);
   }
 
-  $('#todo-list')._$addEvent('click', function(_event) {
+  // 编辑
+  function edit(index) {
+    todoList[index].isEditing = true;
+    render();
+  }
+
+  // 保存
+  function save(index, value) {
+    if(value === '') {
+      removeItem(index);
+    } else {
+      todoList[index].isEditing = false;
+      todoList[index].value = value;
+      render();
+    }
+  }
+
+  // list事件绑定
+  $('#todo-list')._$addEvent('click dblclick', function(_event) {
     var _$dom = $(_event.target);
     var _$li = _$dom._$parent('li');
+    var _$index = _$li._$dataset('index');
+    console.log(_event.type);
     switch(_$dom._$attr('class')) {
       case 'destroy':
-        removeItem(_$li._$dataset('index'));
+        removeItem(_$index);
+        break;
+      case 'content':
+        if(_event.type === 'dblclick') {
+          edit(_$index);
+        }
+        break;
+      case 'edit':
+        // todo input的blur事件如何绑定
+        save(_$index, _$dom._$val());
         break;
     }
   })

@@ -5,6 +5,7 @@ NEJ.define([
 ], function($, _e, _u) {
   var todoList = [];
   var listType = 'all';
+  var _$input = null;
 
   function render() {
     renderList();
@@ -83,12 +84,17 @@ NEJ.define([
       case 'content':
         if(_event.type === 'dblclick') {
           edit(_$index);
+          // todo 在input上绑定保存事件
+          _$input = _$dom._$parent('div')._$siblings('input');
+          setTimeout(function() {
+            console.log(_$input[0]);
+            _$input[0].id = 'xxxxxx';
+          }, 2000);
         }
         break;
-      case 'edit':
-        // todo input的blur事件如何绑定
-        save(_$index, _$dom._$val());
-        break;
+      // case 'edit':
+      //    save(_$index, _$dom._$val());
+      //   break;
     }
   })
   $('#todo-input')._$addEvent('keyup', function(_event) {

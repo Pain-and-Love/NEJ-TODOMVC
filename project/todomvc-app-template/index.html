@@ -6,8 +6,6 @@
 		<title>TodoMVC</title>
 		<link rel="stylesheet" href="./css/base.css">
 		<link rel="stylesheet" href="./css/index.css">
-		<!-- CSS overrides - remove if you don't need it -->
-		<link rel="stylesheet" href="css/app.css">
 	</head>
 	<body>
 		<section class="todoapp">
@@ -47,26 +45,21 @@
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						<a data-index="0" class="selected" href="#/">All</a>
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						<a data-index="1" href="#/active">Active</a>
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						<a data-index="2" href="#/completed">Completed</a>
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button id="clearBtn" class="clear-completed">Clear completed</button>
+				<button class="clear-completed">Clear completed</button>
 			</footer>
 		</section>
 		<footer class="info">
 			<p>Double-click to edit a todo</p>
-			<!-- Remove the below line ↓ -->
-			<!--<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>-->
-			<!-- Change this out with your name and url ↓ -->
-			<!--<p>Created by <a href="http://todomvc.com">you</a></p>-->
-			<!--<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>-->
 		</footer>
 		<!-- Scripts here. Don't remove ↓ -->
 		<script src="../js/nej-framework-master/src/define.js"></script>
